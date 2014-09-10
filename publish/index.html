@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+  <meta name="keyword" content="二分之一,web前端,前端博客,树莓派,RaspberryPi,html5,css3,as3,javascript" />
+  <meta name="description" content="二分之一博客是一个关注web前端及游戏前端的技术博客" />
+  <title>二分之一 - Just Jason's Blog</title>
+  <link rel="stylesheet" type="text/css" href="/assets/css/style.css?version=20140909" />
+  <link rel="stylesheet" type="text/css" href="/assets/css/highlight/pojoaque.css?version=20140909" />
+  <link rel="stylesheet" type="text/css" href="http://fonts.useso.com/css?family=Noto+Serif:400,700,400italic|Open+Sans:700,400" />
+  <!--[if lt IE 9]><script src="/assets/js/html5.js?version=20140909"></script><![endif]-->
+</head>
+
+<body>
+<div class="toolbar">
+    <div class="nav-wrapper clearfix">
+        <ul class="nav-list">
+            <li>
+                <a href="/tag/javascript">Javascript</a>
+            </li>
+            <li>
+                <a href="/tag/NodeJs">NodeJs</a>
+            </li>
+            <li>
+                <a href="/tag/html5">Html5</a>
+            </li>
+            <li>
+                <a href="/tag/RaspberryPi">Raspberry Pi</a>
+            </li>
+            <li>
+                <a href="/tag/metalsmith">Metalsmith</a>
+            </li>
+        </ul>
+
+        <ul class="nav-list menu">
+            <li>
+                <a href="/about.html">关于我</a>
+            </li>
+            <li>
+                <a href="/mobile/">
+                    <i class="mobile_icon"></i><span class="mobile_msg">手机访问</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<header class="top-header">
+	<section>
+    	<a href="/" class="logo"></a>
+        <h1 class="blog-name">二分之一</h1>
+        <h2 class="blog-description">Just Jason's Blog</h2>
+    </section>
+</header>
+
+
+<div class="wrapper">
+
+    <article class="post">
+        <header class="post-header">
+            <span class="post-meta">
+                <time datetime="2014年9月10日">2014年9月10日</time>
+                <em>on</em>
+                <a href="/tag/metalsmith">metalsmith</a>
+            </span>
+            <h2><a href="/post/metalsmith-tuijs-blog">基于Metalsmith的静态页面博客：tuijs-blog</a></h2>
+        </header>
+        <p>本博客系统是基于Metalsmith的静态页面博客。Metalsmith易用易上手，高度模块化，扩展性良好，它不仅仅是一个静态网站生成平台，更可以搭建起前端通用构建平台。</p>
+<p>将动态网页静态化，可以有效减轻服务器端的压力，并且静态网页的访问速度要快于动态网页。此外，使用静态网页还有利于搜索引擎的收录，从而提高网站的搜索排名。 </p>
+<blockquote>
+<p>Metalsmith：An extremely simple, pluggable static site generator.</p>
+</blockquote>
+<h4 id="-">开启搭建你的静态博客</h4>
+<p>1、首先需要安装NodeJs</p>
+<p>2、在tuijs-blog的源码目录执行以下命令，安装所有依赖库。</p>
+<pre><code class="hljs shell"><span class="hljs-built_in">npm</span> install
+</code></pre>
+<p>3、构建静态页面</p>
+<pre><code class="hljs shell"><span class="hljs-title">node</span> build.js
+</code></pre>
+<p>4、运行本地静态服务器</p>
+<pre><code class="hljs shell"><span class="hljs-title">node</span> app.js
+</code></pre>
+<h4 id="-markdown-">解决markdown报错</h4>
+<p>markdown插件不够严谨，需要进行以下修改修正错误。</p>
+<p><strong>修改文件：</strong> <code>node_modules/metalsmith-markdown/lib/index.js</code></p>
+<p>大约修改40行，将以下代码修改：</p>
+<pre><code class="hljs javascript"><span class="hljs-typedef"><span class="hljs-keyword">data</span>[key] = marked<span class="hljs-container">(<span class="hljs-title">data</span>[<span class="hljs-title">key</span>], <span class="hljs-title">options</span>)</span>;</span>
+</code></pre>
+<p><strong>修改为：</strong></p>
+<pre><code class="hljs javascript">if(data[<span class="hljs-built_in">key</span>]){
+    <span class="hljs-built_in">var</span> strForKey = data[<span class="hljs-built_in">key</span>].toString();
+    data[<span class="hljs-built_in">key</span>] = marked(strForKey, options);
+}
+</code></pre>
+<h4 id="-">相关链接</h4>
+<p>Metalsmith官方：<a href="http://www.metalsmith.io">http://www.metalsmith.io</a></p>
+<p>在线演示：<a href="http://www.2fz1.com/">http://www.2fz1.com/</a></p>
+<p>本项目Github地址：<a href="http://https://github.com/zzyss86/tuijs-blog">https://github.com/zzyss86/tuijs-blog</a></p>
+
+        <p><a href="/post/metalsmith-tuijs-blog" rel="nofollow" class="read-more">Read more »</a></p>
+    </article>
+
+    <nav role="navigation" class="pagination">
+        
+    	<span class="page-number">Page 1 of 1</span>
+        
+	</nav>
+
+
+</div>
+
+<footer>
+	<p class="copyright">&copy; 2014 <a href="/">Jason’s Blog</a>. All rights reserved.</p>
+    <p>Proudly published with <a href="http://metalsmith.io/" target="_blank">Metalsmith</a></p>
+    <p><a href="http://www.miibeian.gov.cn/" target="_blank">闽ICP备09029032号-1</a> |
+        <script language="javascript" type="text/javascript" src="http://js.users.51.la/6883474.js"></script></p>
+</footer>
+
+<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/assets/uitotop/js/easing.js?version=20140909"></script>
+<script type="text/javascript" src="/assets/uitotop/js/jquery.ui.totop.min.js?version=20140909"></script>
+<script src="/assets/js/app.js?version=20140909"></script>
+<!--[if lt IE 8]><script src="/assets/js/noLtIE8.js?version=20140909"></script><![endif]-->
+<!-- JiaThis Button BEGIN -->
+<script type="text/javascript" >
+    var jiathis_config={
+        data_track_clickback:true,
+        shortUrl:false,
+        hideMore:false
+    }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1879675" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+</body>
+</html>

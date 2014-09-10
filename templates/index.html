@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+  <meta name="keyword" content="{{kewords}}" />
+  <meta name="description" content="{{description}}" />
+  <title>{{website_name}} - {{{website_slogan}}}</title>
+{{include "_head_res.html"}}
+</head>
+
+<body>
+{{include "_toolbar.html"}}
+
+{{include "_header.html"}}
+
+<div class="wrapper">
+
+{{#each posts}}
+{{include "_post.html" listFlag="true"}}
+{{/each}}
+
+{{include "_paginate.html"}}
+
+</div>
+
+{{include "_footer.html"}}
+
+{{include "_body_res.html"}}
+</body>
+</html>

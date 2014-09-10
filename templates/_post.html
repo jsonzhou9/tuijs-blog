@@ -1,0 +1,39 @@
+    <article class="post">
+        <header class="post-header">
+            <span class="post-meta">
+                <time datetime="{{ date }}">{{ date }}</time>
+                {{#if tags.length}}
+                <em>on</em>
+                {{#each tags}}
+                <a href="{{../website_url}}tag/{{this}}">{{this}}</a>
+                {{#unless @last}}
+                ,
+                {{/unless}}
+                {{/each}}
+                {{/if}}
+            </span>
+            {{#if listFlag}}
+            <h2><a href="{{{website_url}}}{{ path }}">{{ title }}</a></h2>
+            {{else}}
+            <h2>{{ title }}</h2>
+            {{/if}}
+        </header>
+        {{#if listFlag}}
+        {{{ less }}}
+        <p><a href="{{{website_url}}}{{ path }}" rel="nofollow" class="read-more">Read more »</a></p>
+        {{else}}
+        {{{ contents }}}
+        <p class="last-edit-time">最后修改时间：{{ mtime }}</p>
+        <div class="share_wrapper">
+            <div class="jiathis_style_32x32">
+                <a class="jiathis_button_qzone"></a>
+                <a class="jiathis_button_tsina"></a>
+                <a class="jiathis_button_tqq"></a>
+                <a class="jiathis_button_renren"></a>
+                <a class="jiathis_button_kaixin001"></a>
+                <a class="jiathis_button_weixin"></a>
+                <a href="http://www.jiathis.com/share?uid=1879675" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+            </div>
+        </div>
+        {{/if}}
+    </article>

@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>TEST</title>
+<style type="text/css">
+table td{border: 1px solid #CCCCCC;}
+</style>
+</head>
+
+<body>
+<input name="" type="button" value="邮递员发报" id="postman" />  <input name="" type="button" value="清空住户信箱" id="clear" />
+<table width="700" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; margin-top:10px;">
+  <tr>
+    <td width="100">住户一</td>
+    <td width="80"><input name="" type="button" value="订报" class="add" data="custom1" /></td>
+    <td width="80"><input name="" type="button" value="退订" class="cancel" data="custom1" /></td>
+    <td id="msg_0"></td>
+  </tr>
+  <tr>
+    <td>住户二</td>
+    <td><input name="" type="button" value="订报" class="add" data="custom2" /></td>
+    <td><input name="" type="button" value="退订" class="cancel" data="custom2" /></td>
+    <td id="msg_1"></td>
+  </tr>
+  <tr>
+    <td>住户三</td>
+    <td><input name="" type="button" value="订报" class="add" data="custom3" /></td>
+    <td><input name="" type="button" value="退订" class="cancel" data="custom3" /></td>
+    <td id="msg_2"></td>
+  </tr>
+  <tr>
+    <td>住户四</td>
+    <td><input name="" type="button" value="订报" class="add" data="custom4" /></td>
+    <td><input name="" type="button" value="退订" class="cancel" data="custom4" /></td>
+    <td id="msg_3"></td>
+  </tr>
+</table>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript">
+/**************订阅者/观察者/subscribe************/
+function ObserverList(){
+	this.observerList = [];
+};
+
+//添加
+ObserverList.prototype.Add = function(obj){
+	if(this.IndexOf(obj,0)==-1){
+		return this.observerList.push(obj);
+	}else{
+		this.observerList;
+	}
+};
+
+//清空
+ObserverList.prototype.Empty = function(){
+	this.observerList = [];
+};
+
+//统计
+ObserverList.prototype.Count = function(){
+	return this.observerList.length;
+};
+
+//获取
+ObserverList.prototype.Get = function(index){
+	if(index>-1 && index<this.observerList.length){
+		return this.observerList[index];
+	}
+};
+
+//插入
+ObserverList.prototype.Insert = function(obj,index){
+	var pointer = -1;
+	if(index===0){
+		this.observerList.unshift(obj);
+		pointer = index;
+	}else if(index === this.observerList.length){
+		this.observerList.push(obj);
+		pointer = index;
+	}
+	return pointer;
+};
+
+//查询位置
+ObserverList.prototype.IndexOf = function(obj,startIndex){
+	var i = startIndex,pointer = -1;
+	while(i<this.observerList.length){
+		if(this.observerList[i]===obj){
+			pointer = i;
+		}
+		i++;
+	}
+	return pointer;
+};
+
+ObserverList.prototype.RemoveIndexAt = function(index){
+	if(index===0){
+		this.observerList.shift();
+	}else if(index===this.observerList.length-1){
+		this.observerList.pop();
+	}else{
+		this.observerList.splice(index,1);
+	}
+}
+
+//扩展对象
+function extend(obj,extension){
+	for(var key in obj){
+		extension[key] = obj[key];
+	}
+}
+
+/**************发布者/目标/publish****************/
+function Subject(){
+	this.observers = new ObserverList();
+}
+
+Subject.prototype.AddObserver = function(observer){
+	this.observers.Add(observer);
+};
+
+Subject.prototype.RemoveObserver = function(observer){
+	this.observers.RemoveIndexAt(this.observers.IndexOf(observer,0));
+	console.log(this.observers);
+};
+
+Subject.prototype.Notify = function(context){
+	var observerCount = this.observers.Count();
+	for(var i=0;i<observerCount;i++){
+		this.observers.Get(i).Update(context);
+	}
+};
+
+/************具体的观察者**************/
+function Custom(name,msgid){
+	this.name = name;
+	this.msgid = msgid;
+}
+Custom.prototype.Update = function(context){
+	$("#"+this.msgid).html(this.name+":"+context);
+}
+
+/******************实例化各对象*********************/
+var postman = new Subject();
+var custom1 = new Custom("住户一","msg_0");
+var custom2 = new Custom("住户二","msg_1");
+var custom3 = new Custom("住户三","msg_2");
+var custom4 = new Custom("住户四","msg_3");
+
+$(function(){
+	$("#postman").click(function(){
+		postman.Notify("邮递员发报了！");
+	});
+	
+	$("#clear").click(function(){
+		$("#msg_0").html("");
+		$("#msg_1").html("");
+		$("#msg_2").html("");
+		$("#msg_3").html("");
+	});
+	
+	$(".add").click(function(){
+		var custom = $(this).attr('data');
+		custom = window[custom];
+		postman.AddObserver(custom);
+		custom.Update("订阅成功");
+		return false;
+	});
+	
+	$(".cancel").click(function(){
+		var custom = $(this).attr('data');
+		custom = window[custom];
+		postman.RemoveObserver(custom);
+		custom.Update("退订");
+		return false;
+	});
+});
+</script>
+</body>
+</html>
