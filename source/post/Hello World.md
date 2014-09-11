@@ -56,6 +56,8 @@ if(data[key]){
 }
 ```
 
+#### 目录说明 ####- ./config.js 配置文件  - ./build.js 构建程序  - ./package.json 项目配置  - ./app.js 本地静态服务器  - ./lib 库文件  - ./templates 模板文件  - ./publish 构建后的静态文件，也是发布目录  - ./source 源文件目录  - ./source/assets/ 资源文件  - ./source/post/ 所有markdown文档所在目录#### 主要特点 ####- 1、markdown编写文档- 2、文档头采用YML数据结构，可以给文档添加任一属性，方便模板中调用（数据库的都是定好字段的）- 3、文档URL自定义，在文档头定义slug就行- 4、文档URL可填写中文，自动转换为拼音URL，利于SEO- 5、构建时，创建静态文件的同时，可以进行SASS,LESS等预编译，压缩CSS，JSS等- 6、可以放到Github的静态空间进行托管，零费用。也可以直接把整站建在CDN上，比如七牛CDN
+
 #### 相关链接 ####
 
 Metalsmith官方：[http://www.metalsmith.io](http://www.metalsmith.io)

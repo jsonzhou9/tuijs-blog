@@ -94,6 +94,34 @@
     data[<span class="hljs-built_in">key</span>] = marked(strForKey, options);
 }
 </code></pre>
+<h4 id="-">目录说明</h4>
+<ul>
+<li>./config.js 配置文件  </li>
+<li>./build.js 构建程序  </li>
+<li>./package.json 项目配置  </li>
+<li>./app.js 本地静态服务器  </li>
+<li>./lib 库文件  </li>
+<li>./templates 模板文件  </li>
+<li>./publish 构建后的静态文件，也是发布目录  </li>
+<li>./source 源文件目录  </li>
+<li>./source/assets/ 资源文件  </li>
+<li>./source/post/ 所有markdown文档所在目录</li>
+</ul>
+<h4 id="-">主要特点</h4>
+<ul>
+<li><p>1、markdown编写文档</p>
+</li>
+<li><p>2、文档头采用YML数据结构，可以给文档添加任一属性，方便模板中调用（数据库的都是定好字段的）</p>
+</li>
+<li><p>3、文档URL自定义，在文档头定义slug就行</p>
+</li>
+<li><p>4、文档URL可填写中文，自动转换为拼音URL，利于SEO</p>
+</li>
+<li><p>5、构建时，创建静态文件的同时，可以进行SASS,LESS等预编译，压缩CSS，JSS等</p>
+</li>
+<li><p>6、可以放到Github的静态空间进行托管，零费用。也可以直接把整站建在CDN上，比如七牛CDN</p>
+</li>
+</ul>
 <h4 id="-">相关链接</h4>
 <p>Metalsmith官方：<a href="http://www.metalsmith.io">http://www.metalsmith.io</a></p>
 <p>在线演示：<a href="http://www.2fz1.com/">http://www.2fz1.com/</a></p>
